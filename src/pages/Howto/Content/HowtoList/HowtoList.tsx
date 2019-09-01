@@ -85,37 +85,46 @@ export class HowtoList extends React.Component<any, IState> {
           </Flex>
           <React.Fragment>
             <div>
-              <FlexGrid flexWrap={'wrap'} justifyContent={'space-between'}>
+              <FlexGrid flexWrap="wrap" mx="-0.75rem">
                 {filteredHowtos.map((howto: IHowto) => (
-                  <Link
-                    to={`/how-to/${encodeURIComponent(howto.slug)}`}
-                    key={howto._id}
+                  <Card
+                    borderRadius={1}
+                    width={[
+                      '100%',
+                      '100%',
+                      'calc(50% - 1.5rem)',
+                      'calc(33% - 1.5rem)',
+                    ]}
+                    overflow="hidden"
+                    m="0.75rem"
+                    bg="white"
                   >
-                    <Box my={4}>
-                      <Card borderRadius={1} width={[380]} bg={'white'}>
-                        <CardImage src={howto.cover_image.downloadUrl} />
-                        <Box width={'45px'} bg="white" mt={'-24px'} ml={'29px'}>
-                          <Image src={PpLogo} />
-                        </Box>
-                        <CardInfosContainer px={4} pb={3}>
-                          <CardTitle fontSize={4} bold>
-                            {howto.title}
-                          </CardTitle>
+                    <Link
+                      to={`/how-to/${encodeURIComponent(howto.slug)}`}
+                      key={howto._id}
+                    >
+                      <CardImage src={howto.cover_image.downloadUrl} />
+                      <Box width={'45px'} bg="white" mt={'-24px'} ml={'29px'}>
+                        <Image src={PpLogo} />
+                      </Box>
+                      <CardInfosContainer px={4} pb={3}>
+                        <CardTitle fontSize={4} bold>
+                          {howto.title}
+                        </CardTitle>
 
-                          <Text fontSize={1} mt={2} mb={3} color={'grey4'}>
-                            by{' '}
-                            <Text inline color={'black'}>
-                              {howto._createdBy}
-                            </Text>
+                        <Text fontSize={1} mt={2} mb={3} color={'grey2'}>
+                          by{' '}
+                          <Text inline color={'black'}>
+                            <strong>{howto._createdBy}</strong>
                           </Text>
-                          {howto.tags &&
-                            Object.keys(howto.tags).map(tag => {
-                              return <TagDisplay key={tag} tagKey={tag} />
-                            })}
-                        </CardInfosContainer>
-                      </Card>
-                    </Box>
-                  </Link>
+                        </Text>
+                        {howto.tags &&
+                          Object.keys(howto.tags).map(tag => {
+                            return <TagDisplay key={tag} tagKey={tag} />
+                          })}
+                      </CardInfosContainer>
+                    </Link>
+                  </Card>
                 ))}
               </FlexGrid>
             </div>
